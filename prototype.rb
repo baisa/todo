@@ -32,17 +32,20 @@ while input = gets.chomp
 		status = gets.chomp
 		my_hash[name][task] = [person, deadline, status]
 
+
 	elsif input == "CURRENT LIST"
 		print "#{name}"
+
+	elsif input == "CHANGE LIST"
+		print "Name a wanted list: "
+		name = gets.chomp
+		my_hash[name][task]
 
 	elsif input == "INSPECT"
 		print my_hash
 		print "\n"
 
-	elsif input == "CHANGE LIST"
-		print "Name a wanted list: "
-		wanted_list = gets.chomp
-		print my_hash[wanted_list]
+
 		
 	else
 		print "Incorrect phrase. Please write again.""\n""> "
