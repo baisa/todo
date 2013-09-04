@@ -1,4 +1,8 @@
 require_relative 'table'
+def all_tasks_array(task)
+	all_tasks = task.to_a
+	all_tasks.collect! { |elem| elem.flatten!}
+end
 
 print "> "
 
@@ -24,6 +28,7 @@ while input = gets.chomp
 		my_hash[name] = {}
 		print "List #{name} is created.\n"
 
+
 	elsif input == "ADD TASK"
 		print "Please name the task""\n""> "
 		task = gets.chomp
@@ -48,21 +53,30 @@ while input = gets.chomp
 		
 
 	elsif input == "INSPECT"
-		print my_hash"\n""> "
+		print my_hash
 		print "\n"
 
 	elsif input == "SHOW ALL TASKS"
-		all_tasks = my_hash[name].to_a
-		all_tasks.collect! { |elem| elem.flatten!}
-		print pretty_table(all_tasks)
+		
+		print pretty_table(all_tasks_array(my_hash[name]))
 		print "\n"
-
+	
+	elsif input == "SHOW TASKS FOR"
+		print "Please enter a name of inspected person\n"
+		inspected_person = gets.chomp
+		persons_tasks = []
+		all_tasks_array(my_hash[name]).each do |elem|
+			elem.each do |x|
+				if x == inspected_person
+					persons_tasks << elem[0]
+				end
+			end
+		end
+		print persons_tasks
 
 	elsif input == "SHOW ALL LISTS"
 		my_hash.each_key { |k| print "#{k} "}
 		print "\n"
-
-
 		
 	else
 		print "Incorrect phrase. Please write again.""\n""> "
