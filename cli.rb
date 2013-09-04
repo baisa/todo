@@ -77,6 +77,22 @@ while input = gets.chomp
 	elsif input == "SHOW ALL LISTS"
 		my_hash.each_key { |k| print "#{k} "}
 		print "\n"
+
+
+	elsif input == "SHOW LIST STATS"
+		amount_of_tasks = all_tasks_array(my_hash[name]).size
+		number_of_done_tasks = 0
+		number_of_waiting_tasks = 0
+		all_tasks_array(my_hash[name]).each do |elem|
+			if elem[2] == "Yes"
+				number_of_done_tasks = number_of_done_tasks + 1
+			else
+				number_of_waiting_tasks = number_of_waiting_tasks + 1
+			end
+		end
+	
+		stats_array = [["amount_of_tasks", "number_of_done_tasks", "number_of_waiting_tasks"], [amount_of_tasks, number_of_done_tasks, number_of_waiting_tasks]]
+		print pretty_table(stats_array)
 		
 	else
 		print "Incorrect phrase. Please write again.""\n""> "
